@@ -2,7 +2,7 @@
 
 This plugin allow you to sync a colorscheme for light or dark mode with the macos current theme.
 
-DEMO HERE
+![ezgif com-video-to-gif](https://github.com/cherryramatisdev/theme-sync.vim/assets/86631177/8e19d584-380b-4d35-aaa4-81358264f6b5)
 
 ## Installation
 
