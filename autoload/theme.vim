@@ -4,7 +4,7 @@ function! theme#CheckIsDark() abort
   return l:appearance =~ "Dark"
 endfunction
 
-function! theme#SwitchTheme() abort
+function! theme#SwitchTheme(timer_id) abort
   if !exists('g:theme_sync_dark_colorscheme') || !exists('g:theme_sync_light_colorscheme')
     echoerr "Please setup the g:theme_sync_light_colorscheme and g:theme_sync_dark_colorscheme for allowing to theme sync"
     return
