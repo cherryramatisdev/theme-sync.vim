@@ -1,7 +1,17 @@
-function! theme#CheckIsDark() abort
-  let l:appearance = system("defaults read -g AppleInterfaceStyle")
+function! s:CheckIsDark() abort
+  let l:appearance = system('defaults read -g AppleInterfaceStyle')
 
-  return l:appearance =~ "Dark"
+  return l:appearance =~ 'Dark'
+endfunction
+
+" TODO: horrible function name
+function! s:SetThemeIfNotSetted(mode, colorscheme) abort
+  if (&background =~ 'dark' && a:mode =~ 'dark') || (&background =~ 'light' && a:mode =~ 'light')
+    return
+  endif
+
+  execute('set background=' . a:mode)
+  execute('colorscheme ' . a:colorscheme)
 endfunction
 
 function! theme#SwitchTheme(timer_id) abort
@@ -10,11 +20,9 @@ function! theme#SwitchTheme(timer_id) abort
     return
   endif
 
-  if theme#CheckIsDark()
-    set background=dark
-    execute('colorscheme ' . g:theme_sync_dark_colorscheme)
+  if s:CheckIsDark()
+    call s:SetThemeIfNotSetted('dark', g:theme_sync_dark_colorscheme)
   else
-    set background=light
-    execute('colorscheme ' . g:theme_sync_light_colorscheme)
+    call s:SetThemeIfNotSetted('light', g:theme_sync_light_colorscheme)
   endif
 endfunction
