@@ -6,7 +6,7 @@ This plugin allow you to sync a colorscheme for light or dark mode with the maco
 
 ## Installation
 
-This plugin has dependency with the [tpope vim-dispatch](https://github.com/tpope/vim-dispatch) and can be installed as follows using some package manager like [vim-plug](https://github.com/junegunn/vim-plug):
+This plugin can be installed as follows using some package manager like [vim-plug](https://github.com/junegunn/vim-plug) or any other of your choice:
 
 ```vim
 call plug#begin()
