@@ -1,28 +1,28 @@
-function! s:CheckIsDark() abort
-  let l:appearance = system('defaults read -g AppleInterfaceStyle')
+" TODO: refactor this
+function! theme#SwitchTheme(...) abort
+  if exists('a:2')
+    if (a:2 == 'Dark' && &background == 'dark' && exists('g:colors_name')) || (a:2 != 'Dark' && &background == 'light' && exists('g:colors_name'))
+      return
+    endif
 
-  return l:appearance =~ 'Dark'
+    if a:2 == 'Dark'
+      set background=dark
+      call execute('colorscheme ' . g:theme_sync_dark_colorscheme)
+    else
+      set background=light
+      call execute('colorscheme ' . g:theme_sync_light_colorscheme)
+    endif
+  endif 
 endfunction
 
-" TODO: horrible function name
-function! s:SetThemeIfNotSetted(mode, colorscheme) abort
-  if (&background =~ 'dark' && a:mode =~ 'dark') || (&background =~ 'light' && a:mode =~ 'light')
-    return
-  endif
-
-  execute('set background=' . a:mode)
-  execute('colorscheme ' . a:colorscheme)
-endfunction
-
-function! theme#SwitchTheme(timer_id) abort
+function! theme#StartTimer(timer_id) abort
   if !exists('g:theme_sync_dark_colorscheme') || !exists('g:theme_sync_light_colorscheme')
     echoerr "Please setup the g:theme_sync_light_colorscheme and g:theme_sync_dark_colorscheme for allowing to theme sync"
-    return
+    return 
   endif
 
-  if s:CheckIsDark()
-    call s:SetThemeIfNotSetted('dark', g:theme_sync_dark_colorscheme)
-  else
-    call s:SetThemeIfNotSetted('light', g:theme_sync_light_colorscheme)
-  endif
+  call job_start(['defaults', 'read', '-g', 'AppleInterfaceStyle'], {
+        \   'out_cb': 'theme#SwitchTheme',
+        \   'err_cb': 'theme#SwitchTheme',
+        \ })
 endfunction
