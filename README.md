@@ -25,6 +25,14 @@ let g:theme_sync_dark_colorscheme = 'andrew'
 
 2. Enjoy! 🚀🍒
 
+## Bonus tip!
+
+Today this plugin don't support linux or windows, but if you have a personal script that return either "dark" or "light" for the current theme, it's possible to plug-in with the following setting:
+
+```vim
+let g:theme_sync_get_theme_cmd = 'your-script'
+```
+
 ## How to contribute
 
 We welcome pull requests for bug fixes, new features, and improvements. To submit a pull request, follow these steps:
