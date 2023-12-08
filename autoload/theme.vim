@@ -1,7 +1,7 @@
 " TODO: refactor this
 function! theme#SwitchTheme(...) abort
   if exists('a:2')
-    if (a:2 == 'Dark' && &background == 'dark' && exists('g:colors_name')) || (a:2 != 'Dark' && &background == 'light' && exists('g:colors_name'))
+    if (a:2 =~ 'Dark\|dark' && &background == 'dark' && exists('g:colors_name')) || (a:2 =~# 'Dark\|dark' && &background == 'light' && exists('g:colors_name'))
       return
     endif
 
