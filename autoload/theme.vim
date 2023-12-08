@@ -28,8 +28,12 @@ function! theme#StartTimer(timer_id) abort
     let l:get_theme_cmd = g:theme_sync_get_theme_cmd
   endif
 
-  call job_start(l:get_theme_cmd, {
-        \   'out_cb': 'theme#SwitchTheme',
-        \   'err_cb': 'theme#SwitchTheme',
-        \ })
+  if has('nvim')
+    lua require('theme_sync').switch_theme()
+  else
+    call job_start(l:get_theme_cmd, {
+          \   'out_cb': 'theme#SwitchTheme',
+          \   'err_cb': 'theme#SwitchTheme',
+          \ })
+  endif
 endfunction

@@ -33,6 +33,10 @@ Today this plugin don't support linux or windows, but if you have a personal scr
 let g:theme_sync_get_theme_cmd = 'your-script'
 ```
 
+## To Dos
+
+- [ ] The neovim support is really bad right now, it's just updating the `background` and not changing the colorscheme
+
 ## How to contribute
 
 We welcome pull requests for bug fixes, new features, and improvements. To submit a pull request, follow these steps:
