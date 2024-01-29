@@ -1,11 +1,17 @@
 " TODO: refactor this
 function! theme#SwitchTheme(...) abort
   if exists('a:2')
-    if (a:2 =~ 'Dark\|dark' && &background == 'dark' && exists('g:colors_name')) || (a:2 =~# 'Dark\|dark' && &background == 'light' && exists('g:colors_name'))
+    if has('nvim')
+      let l:target = index(a:2, 0)
+    else
+      let l:target = a:2
+    endif
+
+    if (l:target =~ 'Dark\|dark' && &background == 'dark' && exists('g:colors_name')) || (l:target =~# 'Dark\|dark' && &background == 'light' && exists('g:colors_name'))
       return
     endif
 
-    if a:2 =~ 'Dark\|dark'
+    if l:target =~ 'Dark\|dark'
       set background=dark
       call execute('colorscheme ' . g:theme_sync_dark_colorscheme)
     else
@@ -29,7 +35,10 @@ function! theme#StartTimer(timer_id) abort
   endif
 
   if has('nvim')
-    lua require('theme_sync').switch_theme()
+    call jobstart(l:get_theme_cmd, {
+          \ 'on_stdout': 'theme#SwitchTheme',
+          \ 'on_stderr': 'theme#SwitchTheme',
+          \ })
   else
     call job_start(l:get_theme_cmd, {
           \   'out_cb': 'theme#SwitchTheme',
