@@ -9,6 +9,6 @@ augroup ThemeSyncOS
   autocmd BufRead * call theme#DecideTheme(0)
 augroup END
 
-if g:disable_timer == 1
+if g:theme_sync_disable_timer == 1
   call timer_start(1000, function('theme#DecideTheme'), {'repeat': -1})
 endif
