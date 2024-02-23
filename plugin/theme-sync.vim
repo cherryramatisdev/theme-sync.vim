@@ -5,8 +5,10 @@ let g:loaded_theme_sync = 1
 
 augroup ThemeSyncOS
   autocmd! 
-  autocmd VimEnter * call theme#StartTimer(0)
-  autocmd BufRead * call theme#StartTimer(0)
+  autocmd VimEnter * call theme#DecideTheme(0)
+  autocmd BufRead * call theme#DecideTheme(0)
 augroup END
 
-call timer_start(1000, function('theme#StartTimer'), {'repeat': -1})
+if g:disable_timer == 1
+  call timer_start(1000, function('theme#DecideTheme'), {'repeat': -1})
+endif

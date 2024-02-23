@@ -2,7 +2,7 @@
 function! theme#SwitchTheme(...) abort
   if exists('a:2')
     if has('nvim')
-      let l:target = index(a:2, 0)
+      let l:target = a:2[0]
     else
       let l:target = a:2
     endif
@@ -21,7 +21,7 @@ function! theme#SwitchTheme(...) abort
   endif
 endfunction
 
-function! theme#StartTimer(timer_id) abort
+function! theme#DecideTheme(timer_id) abort
   if !exists('g:theme_sync_dark_colorscheme') || !exists('g:theme_sync_light_colorscheme')
     echoerr "Please setup the g:theme_sync_light_colorscheme and g:theme_sync_dark_colorscheme for allowing to theme sync"
     return
