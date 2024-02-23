@@ -7,9 +7,9 @@ function! theme#SwitchTheme(...) abort
       let l:target = a:2
     endif
 
-    if (l:target =~ 'Dark\|dark' && &background == 'dark' && exists('g:colors_name')) || (l:target =~# 'Dark\|dark' && &background == 'light' && exists('g:colors_name'))
-      return
-    endif
+    " if (l:target =~ 'Dark\|dark' && &background == 'dark' && exists('g:colors_name')) || (l:target =~# 'Dark\|dark' && &background == 'light' && exists('g:colors_name'))
+    "   return
+    " endif
 
     if l:target =~ 'Dark\|dark'
       set background=dark
